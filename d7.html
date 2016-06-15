@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="css/user-profile.css">
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<style>
+</style>
+</head>
+
+<body>
+
+<div class="user-profile big"
+	ng-repeat="(key, profile) in profiles"
+	user-profile
+	name="profile.name"
+	avatar="profile.avatar"
+	phone="profile.phone"
+	description="profile.description"
+>
+	<i>这是<< {{ profile.name }} >>额外的内容...</i>
+</div>
+
+<script>
+angular.module('app', [])
+.directive('userProfile', [function(){
+	return {
+		templateUrl: 'tmpl/d7.html',
+		restrict: "A",
+		replace: true,
+		scope: {
+			name: '=',
+			avatar: '=',
+			phone: '=',
+			description: '='
+		},
+		transclude: true,
+		link: function(scope, element, attrs){
+			element.on('click', function(e){
+				element.toggleClass('big')
+			})
+		}
+	};
+}])
+.run(['$rootScope', function($rootScope){
+	$rootScope.profiles = Array(5).join('.').split('.').map(function(p, i){
+		var profile = {};
+		profile.name = ['海云', i, Math.random().toString(36).substr(2)].join('-');
+		profile.avatar = 'https://www.awcloud.com/images/logo.png';
+		profile.phone = '4000-365-805';
+		profile.description = '海云 Description' + Math.random().toString(36).substr(2);
+
+		return profile;
+	})
+}])
+</script>
+</body>
+</html>

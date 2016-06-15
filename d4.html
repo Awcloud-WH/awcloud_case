@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="css/user-profile.css">
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<style>
+
+</style>
+</head>
+
+<body>
+<div class="user-profile" user-profile></div>
+<script>
+angular.module('app', [])
+.directive('userProfile', [function(){
+	return {
+		templateUrl: 'tmpl/d4.html',
+		restrict: "A",
+		replace: true,
+		controller: ['$scope', function($scope){
+			$scope.name = '海云捷迅214124';
+			$scope.avatar = 'https://www.awcloud.com/images/logo.png';
+			$scope.phone = '4000-365-805';
+			$scope.description = '海云捷迅成立于2010年，总部位于北京，在深圳、成都、武汉、银川、贵阳设有分公司或办事处，拥有行业内最专业的研发、运营和服务团队，对云计算、虚拟化、IaaS有着深入理解和多年研发运营经验。先后设计过数十个大中型私有云、公有云平台，具备万台虚拟机规模的一线运营经验，可以为企业客户提供成熟的OpenStack运营和运维服务。';
+		}],
+		link: function(scope, element, attrs){
+			element.on('click', function(e){
+				element.toggleClass('big')
+			})
+		}
+	};
+}])
+</script>
+</body>
+</html>

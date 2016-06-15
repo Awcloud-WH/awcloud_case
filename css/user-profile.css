@@ -1,0 +1,39 @@
+.user-profile{
+	width: 0px;
+	height: 120px;
+	box-shadow: 0 0 1px #000;
+	font-size: 14px;
+	position: relative;
+	padding-left: 120px;
+	background: #eee;
+	overflow: hidden;
+	transition: width 500ms ease 0ms;
+	margin: 8px;
+}
+.user-profile.big{
+	width: 460px;
+}
+.user-profile .user-avatar{
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 10px;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	border-radius: 50%;
+	box-shadow: 1px 1px 8px #000;
+}
+.user-profile .user-avatar img{
+	display: block;
+	height: 100px;
+	width: auto;
+}
+.user-profile .user-info{
+	padding: 8px 16px;
+}
+.user-profile .user-description{
+	padding: 8px 16px;
+	font-size: 12px;
+	text-indent: 24px;
+}

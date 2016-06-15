@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<!--
+<script src="lib/core.js"></script>
+<script src="lib/helper.js"></script>
+<script src="lib/provider.js"></script>
+<script src="lib/filter.js"></script>
+<script src="lib/directive.js"></script>
+<script src="lib/extend.js"></script>
+-->
+</head>
+
+<body class="ng-cloak">
+<user-profile name="'awcloud-user'" avatar-url="https://www.awcloud.com/images/logo.png">
+	<user-avatar title="name" src="{{ avatarUrl }}"></user-avatar>
+	<user-description desc="profile.name"></user-description>
+</user-profile>
+
+
+<ul ng-controller="ngModuleAPI as api">
+	<li ng-repeat="method in api.methods">
+		<a>{{ method }}</a>
+	</li>
+</ul>
+<script src="app.js"></script>
+</body>
+</html>

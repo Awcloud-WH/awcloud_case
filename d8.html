@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="css/user-profile.css">
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<style>
+.user-avatar-custom{
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 10px;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+.user-profile .del{
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: red;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	line-height: 16px;
+	color: white;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="user-profile big"
+	ng-repeat="(key, profile) in profiles"
+	user-profile
+	name="profile.name"
+	avatar="profile.avatar"
+	phone="profile.phone"
+	description="profile.description"
+	my-click="profile.name + '123'"
+>
+	<user-my-avatar class="user-avatar-custom">
+		<img style="height:60px;" ng-src="{{ profile.avatar }}"><br>
+		<b>[{{ profile.name }}]</b>
+		<input ng-model="profile.name">
+	</user-my-avatar>
+
+</div>
+<abcde></abcde>
+<!--
+	<user-avatar class="user-avatar-custom">
+		<img style="height:60px;" ng-src="{{ profile.avatar }}"><br>
+		<b>{{ profile.name }}</b>
+	</user-avatar>
+	<user-description>自定义描述内容 {{ profile.description }}</user-description>
+
+-->
+<script>
+angular.module('app', [])
+.directive('userProfile', [function(){
+	return {
+		templateUrl: 'tmpl/d8.html',
+		restrict: "A",
+		replace: true,
+		scope: {
+			name: '<', /*  = < @ & */
+			avatar: '=',
+			phone: '=',
+			description: '=',
+			myClick: '&'
+		},
+		transclude: {
+			avatar: '?userMyAvatar',
+			description: '?userDescription',
+			commandbar: '?userCommandbar'
+		},
+		link: function(scope, element, attrs){
+			element.find('user-avatar').on('click', function(e){
+				element.toggleClass('big')
+			})
+		}
+	};
+}])
+
+.run(['$rootScope', function($rootScope){
+	$rootScope.profiles = Array(5).join('.').split('.').map(function(p, i){
+		var profile = {};
+		profile.name = ['海云', i].join('-');
+		profile.avatar = 'https://www.awcloud.com/images/logo.png';
+		profile.phone = '4000-365-805';
+		profile.description = '海云 Description' + Math.random().toString(36).substr(2);
+
+		return profile;
+	})
+	$rootScope.removeProfile = function(idx){
+		$rootScope.profiles.splice(idx, 1);
+	}
+	console.log($rootScope)
+}])
+
+</script>
+</body>
+</html>
